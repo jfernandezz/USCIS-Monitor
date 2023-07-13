@@ -54,19 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUSCISInformation(String caseNumber, TextView textView) {
-         progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         CompletableFuture.supplyAsync(() -> uscisService.getCaseInformation(caseNumber))
-                .thenApplyAsync(new GsonBuilder().setPrettyPrinting().create()::toJson)
-                .thenAccept(result -> runOnUiThread(() -> {
-                    textView.setText(result);
-                    progressBar.setVisibility(View.GONE);
-                }))
-                .exceptionally(ex -> {
-                    ex.printStackTrace();
-                    return null;
-                });
-
-
+                .thenApply(new GsonBuilder().setPrettyPrinting().create()::toJson)
+                .thenAccept(textView::setText)
+                .thenRun(()-> progressBar.setVisibility(View.GONE))
+                .join();
     }
 
 
