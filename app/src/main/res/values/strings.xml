@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">USCIS Monitor</string>
+    <string name="work_permit">work permit</string>
+    <string name="residence_application">residence application</string>
+    <string name="review">review</string>
+    <string name="textview">TextView</string>
+    <string name="work_permit_number">work permit number</string>
+    <string name="residence_application_number">residence application number</string>
+</resources>
